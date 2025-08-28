@@ -67,11 +67,12 @@ class ProductRepository {
     }
   }
 
-  async update(id, newProduct) {
+  async update(id, productDataToUpdate) {
     try {
       const updatedProduct = await Product.findOneAndUpdate(
-        { id: id, newProduct },
-        { new: true }
+        { id: id }, 
+        { $set: productDataToUpdate }, 
+        { new: true, runValidators: true }
       );
       const response = {
         status: 201,

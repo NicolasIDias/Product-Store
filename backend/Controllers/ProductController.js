@@ -29,8 +29,14 @@ class ProductController {
 
   async updateProduct(request, response) {
     const { id } = request.params;
-    const { newProduct } = request.body;
-    const res = await ProductRepository.update(id, newProduct);
+    const { name, priceInCents, image } = request.body;
+    const updatedProduct = {
+      name,
+      priceInCents,
+      image
+    }
+    console.log(updatedProduct)
+    const res = await ProductRepository.update(id, updatedProduct);
     response.status(res.status).send(res);
   }
 }
